@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/learn-braille/static/css/main.9c64d1ea.css",
+    "main.js": "/learn-braille/static/js/main.d9bf799f.js",
+    "index.html": "/learn-braille/index.html",
+    "main.9c64d1ea.css.map": "/learn-braille/static/css/main.9c64d1ea.css.map",
+    "main.d9bf799f.js.map": "/learn-braille/static/js/main.d9bf799f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9c64d1ea.css",
+    "static/js/main.d9bf799f.js"
+  ]
+}
