@@ -1,6 +1,6 @@
 export type DecodeResponseType = [boolean, boolean, boolean, boolean, boolean, boolean];
 
-const query = (number: number, index: number): boolean => (number & (1 << index - 1)) > 0;
+const query = (number: number, index: number): boolean => (number & (1 << (index - 1))) > 0;
 
 export const decode = (number: number): DecodeResponseType => {
   const decoded: DecodeResponseType = new Array(6) as DecodeResponseType;
@@ -11,4 +11,4 @@ export const decode = (number: number): DecodeResponseType => {
   }
 
   return decoded;
-}
+};

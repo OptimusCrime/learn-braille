@@ -11,7 +11,7 @@ export class StringIterator {
   }
 
   hasNext() {
-    return this.length >= (this.index + 1);
+    return this.length >= this.index + 1;
   }
 
   goForwards(steps?: number) {
@@ -22,4 +22,3 @@ export class StringIterator {
     return this.characters[this.index + (steps ?? 0)];
   }
 }
-

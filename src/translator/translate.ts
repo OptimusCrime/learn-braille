@@ -1,14 +1,17 @@
 import {
-  BRAILLE, isLetterKey, isSignKey,
-  SYMBOLS, SYMBOLS_LETTERS,
+  BRAILLE,
+  isLetterKey,
+  isSignKey,
+  SYMBOLS,
+  SYMBOLS_LETTERS,
   SYMBOLS_SIGNS,
   SYMBOLS_SPECIAL,
-  SYMBOLS_SPECIAL_CAPITAL_LETTER
-} from "../symbols";
-import {SYMBOLS_SPECIAL_UNKNOWN} from "../symbols/consts";
-import {BrailleNotFoundException} from "./BrailleNotFoundException";
-import {StringIterator} from "./stringIterator";
-import {UnexpectedCharacterException} from "./UnexpectedCharacterException";
+  SYMBOLS_SPECIAL_CAPITAL_LETTER,
+} from '../symbols';
+import { SYMBOLS_SPECIAL_UNKNOWN } from '../symbols/consts';
+import { BrailleNotFoundException } from './BrailleNotFoundException';
+import { StringIterator } from './stringIterator';
+import { UnexpectedCharacterException } from './UnexpectedCharacterException';
 
 export const translate = (input: string, ignoreError?: boolean): BRAILLE[][] => {
   const it = new StringIterator(input);
@@ -101,7 +104,7 @@ export const translate = (input: string, ignoreError?: boolean): BRAILLE[][] => 
   }
 
   return output;
-}
+};
 
 const isSpace = (it: StringIterator): boolean => it.get() === ' ';
 const isDoubleDash = (it: StringIterator): boolean => it.get() === '-' && it.hasNext() && it.get(1) === '-';

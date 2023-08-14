@@ -1,4 +1,4 @@
-import {LETTERS, NUMBERS, SIGNS} from "./keys";
+import { LETTERS, NUMBERS, SIGNS } from './keys';
 
 export const isLetterKey = (input: string): input is typeof LETTERS[number] => LETTERS.includes(input);
 export const isNumberKey = (input: string): input is typeof NUMBERS[number] => NUMBERS.includes(input);

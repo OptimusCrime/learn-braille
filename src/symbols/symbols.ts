@@ -1,12 +1,14 @@
 import {
-  SYMBOLS_LETTERS, SYMBOLS_NUMBERS,
+  SYMBOLS_LETTERS,
+  SYMBOLS_NUMBERS,
   SYMBOLS_SIGNS,
   SYMBOLS_SPECIAL,
   SYMBOLS_SPECIAL_CAPITAL_LETTER,
   SYMBOLS_SPECIAL_NUMBER_START,
-  SYMBOLS_SPECIAL_SPACE, SYMBOLS_SPECIAL_UNKNOWN
-} from "./consts";
-import {SymbolsInterface} from "./types";
+  SYMBOLS_SPECIAL_SPACE,
+  SYMBOLS_SPECIAL_UNKNOWN,
+} from './consts';
+import { SymbolsInterface } from './types';
 
 /**
  * All symbols consists of six dots which are either present or missing. They are most often structured like this:
@@ -20,37 +22,37 @@ import {SymbolsInterface} from "./types";
  *
  * Also note that there are some special characters, and that some characters are a collection of multiple brailles.
  */
-export const SYMBOLS : SymbolsInterface = {
+export const SYMBOLS: SymbolsInterface = {
   [SYMBOLS_LETTERS]: {
-    'a': [0b100000],
-    'b': [0b110000],
-    'c': [0b100100],
-    'd': [0b100110],
-    'e': [0b100010],
-    'f': [0b110100],
-    'g': [0b110110],
-    'h': [0b110010],
-    'i': [0b010100],
-    'j': [0b010110],
-    'k': [0b101000],
-    'l': [0b111000],
-    'm': [0b101100],
-    'n': [0b101110],
-    'o': [0b101010],
-    'p': [0b111100],
-    'q': [0b111110],
-    'r': [0b111010],
-    's': [0b011100],
-    't': [0b011110],
-    'u': [0b101001],
-    'v': [0b111001],
-    'w': [0b010111],
-    'x': [0b101101],
-    'y': [0b101111],
-    'z': [0b101011],
-    'æ': [0b001110],
-    'ø': [0b010101],
-    'å': [0b100001],
+    a: [0b100000],
+    b: [0b110000],
+    c: [0b100100],
+    d: [0b100110],
+    e: [0b100010],
+    f: [0b110100],
+    g: [0b110110],
+    h: [0b110010],
+    i: [0b010100],
+    j: [0b010110],
+    k: [0b101000],
+    l: [0b111000],
+    m: [0b101100],
+    n: [0b101110],
+    o: [0b101010],
+    p: [0b111100],
+    q: [0b111110],
+    r: [0b111010],
+    s: [0b011100],
+    t: [0b011110],
+    u: [0b101001],
+    v: [0b111001],
+    w: [0b010111],
+    x: [0b101101],
+    y: [0b101111],
+    z: [0b101011],
+    æ: [0b001110],
+    ø: [0b010101],
+    å: [0b100001],
   },
   [SYMBOLS_SIGNS]: {
     '.': [0b001000],
@@ -81,8 +83,8 @@ export const SYMBOLS : SymbolsInterface = {
   },
   [SYMBOLS_SPECIAL]: {
     [SYMBOLS_SPECIAL_CAPITAL_LETTER]: [0b000001],
-    [SYMBOLS_SPECIAL_NUMBER_START]:   [0b001111],
+    [SYMBOLS_SPECIAL_NUMBER_START]: [0b001111],
     [SYMBOLS_SPECIAL_SPACE]: [0b000000], // Does not actually exist in symbols. Used to denote space
-    [SYMBOLS_SPECIAL_UNKNOWN]: [0b111111] // Does not actually exist in symbols. Used to denote unknown character
-  }
-}
+    [SYMBOLS_SPECIAL_UNKNOWN]: [0b111111], // Does not actually exist in symbols. Used to denote unknown character
+  },
+};

@@ -1,4 +1,4 @@
-import {Text} from "./types";
+import { Text } from './types';
 
 export const texts: Text[] = [
   {
@@ -8,9 +8,10 @@ export const texts: Text[] = [
       'lk akk kall lakk ball',
       'blakk kaka lakka labba',
       'klabba kabal alka kalka',
-      'klakka'
-    ]
-  }, {
+      'klakka',
+    ],
+  },
+  {
     name: 'Leseøvelse med e, i',
     lines: [
       'bi ebba le ble ebbe el',
@@ -21,14 +22,14 @@ export const texts: Text[] = [
       'bi li ali el eli ille',
       'bile kile like ilke ikke',
       'bikke klikke ei eie lei',
-      'leie bie eike leike'
-    ]
+      'leie bie eike leike',
+    ],
   },
   {
     name: 'Lorem ipsum dolor sit amet',
     lines: [
       'lorem ipsum',
-      'sdflkøj sdfløkjsdf løksdfølksdfløs dfølksdfjløsdkfjs dølfkjsdølfkj sdfølkjsdfølkjsdf lsdkflj'
-    ]
-  }
+      'sdflkøj sdfløkjsdf løksdfølksdfløs dfølksdfjløsdkfjs dølfkjsdølfkj sdfølkjsdfølkjsdf lsdkflj',
+    ],
+  },
 ];

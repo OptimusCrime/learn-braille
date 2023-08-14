@@ -1,1 +1,1 @@
-export class BrailleNotFoundException extends Error {};
+export class BrailleNotFoundException extends Error {}

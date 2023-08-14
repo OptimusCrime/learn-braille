@@ -1,1 +1,1 @@
-export class UnexpectedCharacterException extends Error {};
+export class UnexpectedCharacterException extends Error {}
