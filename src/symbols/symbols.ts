@@ -4,7 +4,7 @@ import {
   SYMBOLS_SPECIAL,
   SYMBOLS_SPECIAL_CAPITAL_LETTER,
   SYMBOLS_SPECIAL_NUMBER_START,
-  SYMBOLS_SPECIAL_SPACE
+  SYMBOLS_SPECIAL_SPACE, SYMBOLS_SPECIAL_UNKNOWN
 } from "./consts";
 import {SymbolsInterface} from "./types";
 
@@ -82,6 +82,7 @@ export const SYMBOLS : SymbolsInterface = {
   [SYMBOLS_SPECIAL]: {
     [SYMBOLS_SPECIAL_CAPITAL_LETTER]: [0b000001],
     [SYMBOLS_SPECIAL_NUMBER_START]:   [0b001111],
-    [SYMBOLS_SPECIAL_SPACE]: [0b000000] // Does not actually exist in symbols. Used to denote space
+    [SYMBOLS_SPECIAL_SPACE]: [0b000000], // Does not actually exist in symbols. Used to denote space
+    [SYMBOLS_SPECIAL_UNKNOWN]: [0b111111] // Does not actually exist in symbols. Used to denote unknown character
   }
 }

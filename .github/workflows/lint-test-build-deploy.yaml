@@ -1,0 +1,53 @@
+name: learn-braille
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node & install dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc  # Use the same version as configured for the project
+
+      - name: Install
+        env:
+          TOKEN_HEADER_NAME: '${{ secrets.TOKEN_HEADER_NAME }}'
+        run: |
+          npm ci
+
+      - name: Typecheck
+        env:
+          TOKEN_HEADER_NAME: '${{ secrets.TOKEN_HEADER_NAME }}'
+        run: |
+          npm run typecheck
+
+      - name: Lint
+        run: |
+          npm run lint
+          npm run prettier
+
+      - name: Test
+        run: |
+          npm run test
+
+      - name: Build
+        env:
+          TOKEN_HEADER_NAME: '${{ secrets.TOKEN_HEADER_NAME }}'
+        # This is beyond stupid, but GitHub can not serve static content from the /static directory for some reason...
+        run: |
+          npm run build
+          mv .nojekyll ./build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.7
+        with:
+          branch: gh-pages
+          folder: build
