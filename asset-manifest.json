@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/learn-braille/static/css/main.9c64d1ea.css",
-    "main.js": "/learn-braille/static/js/main.d9bf799f.js",
+    "main.css": "/learn-braille/static/css/main.c3294892.css",
+    "main.js": "/learn-braille/static/js/main.a3ec2c35.js",
     "index.html": "/learn-braille/index.html",
-    "main.9c64d1ea.css.map": "/learn-braille/static/css/main.9c64d1ea.css.map",
-    "main.d9bf799f.js.map": "/learn-braille/static/js/main.d9bf799f.js.map"
+    "main.c3294892.css.map": "/learn-braille/static/css/main.c3294892.css.map",
+    "main.a3ec2c35.js.map": "/learn-braille/static/js/main.a3ec2c35.js.map"
   },
   "entrypoints": [
-    "static/css/main.9c64d1ea.css",
-    "static/js/main.d9bf799f.js"
+    "static/css/main.c3294892.css",
+    "static/js/main.a3ec2c35.js"
   ]
 }
