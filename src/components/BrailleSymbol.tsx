@@ -12,10 +12,10 @@ const BrailleDot = ({ enabled, padding }: { enabled: boolean; padding?: boolean 
   </div>
 );
 
-export const BrailleSymbol = ({ input, error }: { input: DecodeResponseType; error: boolean }) => (
+export const BrailleSymbol = ({ input, error }: { input: DecodeResponseType; error: boolean | null }) => (
   <div
     className={`flex flex-col items-center justify-center mr-2 border border-hidden hover:border-dashed rounded ${
-      error ? 'bg-red-600' : ''
+      error === null ? '' : error ? 'bg-red-500' : 'bg-green-600'
     }`}
   >
     <BrailleSymbolRow padding={true}>

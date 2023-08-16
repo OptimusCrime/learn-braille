@@ -5,13 +5,14 @@ import { decode } from './decoder';
 import { BRAILLE } from './symbols';
 import { texts } from './texts';
 import { translate } from './translator';
+import { shuffleArray } from './utilities/shuffleArray';
 
 const checkError = (params: {
   correct: BRAILLE[][];
   answer: BRAILLE[][] | null;
   wordIdx: number;
   letterIdx: number;
-}): boolean => {
+}): boolean | null => {
   const { correct, answer, wordIdx, letterIdx } = params;
 
   // Force this because we know it has to exist
@@ -19,7 +20,7 @@ const checkError = (params: {
 
   // If no answer was given, return true
   if (answer === null) {
-    return false;
+    return null;
   }
 
   // Check array lengths
@@ -39,6 +40,7 @@ export const App = () => {
   const [answer, setAnswer] = useState<BRAILLE[][] | null>(null);
   const [currentExercise, setCurrentExercise] = useState<string[] | null>(null);
   const [currentLine, setCurrentLine] = useState<number | null>(null);
+  const [maxLines, setMaxLines] = useState<number | null>(null);
 
   const reset = () => {
     setAnswer(null);
@@ -67,8 +69,9 @@ export const App = () => {
       return;
     }
 
-    setCurrentExercise(exercise.lines);
+    setCurrentExercise(shuffleArray(exercise.lines));
     setCurrentLine(0);
+    setMaxLines(exercise.lines.length);
     reset();
   };
 
@@ -100,7 +103,7 @@ export const App = () => {
       </div>
       {translated !== null && (
         <>
-          <div className="flex justify-center mx-14">
+          <div className="flex justify-center mx-14 flex-wrap">
             {translated.map((word, wordIdx) => (
               <>
                 <div className="flex pb-7">
@@ -130,7 +133,7 @@ export const App = () => {
             {currentExercise !== null && currentLine !== null && currentExercise.length && currentLine > 0 && (
               <div className="flex pr-4">
                 <button className="btn" onClick={() => changeLine(-1)}>
-                  Previous line
+                  {`Previous line ${`(${currentLine} / ${maxLines as number})`}`}
                 </button>
               </div>
             )}
@@ -155,7 +158,7 @@ export const App = () => {
               currentExercise.length > currentLine + 1 && (
                 <div className="flex pl-4">
                   <button className="btn" onClick={() => changeLine(1)}>
-                    Next line
+                    {`Next line ${`(${currentLine + 2} / ${maxLines as number})`}`}
                   </button>
                 </div>
               )}
