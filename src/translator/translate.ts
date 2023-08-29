@@ -7,11 +7,10 @@ import {
   SYMBOLS_SIGNS,
   SYMBOLS_SPECIAL,
   SYMBOLS_SPECIAL_CAPITAL_LETTER,
+  SYMBOLS_SPECIAL_UNKNOWN
 } from '../symbols';
-import { SYMBOLS_SPECIAL_UNKNOWN } from '../symbols/consts';
-import { BrailleNotFoundException } from './BrailleNotFoundException';
+import { BrailleNotFoundException, UnexpectedCharacterException } from './errors';
 import { StringIterator } from './stringIterator';
-import { UnexpectedCharacterException } from './UnexpectedCharacterException';
 
 export const translate = (input: string, ignoreError?: boolean): BRAILLE[][] => {
   const it = new StringIterator(input);
@@ -86,7 +85,12 @@ export const translate = (input: string, ignoreError?: boolean): BRAILLE[][] => 
       }
 
       // Bah, do this later
-      throw new Error('Translating numbers has not yet been implemented');
+      // TODO
+      temporary.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
+      it.goForwards();
+      continue;
+
+      // throw new Error('Translating numbers has not yet been implemented');
     }
 
     // If we got here, we found an unexpected character
@@ -95,6 +99,10 @@ export const translate = (input: string, ignoreError?: boolean): BRAILLE[][] => 
       it.goForwards();
       continue;
     }
+
+    // TODO
+    temporary.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
+    it.goForwards();
 
     throw new UnexpectedCharacterException(`Encountered character we do not know how to handle: ${it.get()}`);
   }

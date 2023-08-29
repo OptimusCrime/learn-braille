@@ -1,3 +1,2 @@
-export { BrailleNotFoundException } from './BrailleNotFoundException';
-export { UnexpectedCharacterException } from './UnexpectedCharacterException';
+export { BrailleNotFoundException, UnexpectedCharacterException } from './errors';
 export { translate } from './translate';

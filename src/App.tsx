@@ -3,9 +3,17 @@ import React, { useState } from 'react';
 import { BrailleSymbol, BrailleSymbolSpace } from './components/BrailleSymbol';
 import { decode } from './decoder';
 import { BRAILLE } from './symbols';
-import { texts } from './texts';
 import { translate } from './translator';
-import { shuffleArray } from './utilities/shuffleArray';
+import {WordList} from "./wordList/wordList";
+import {Layout} from "./components/Layout";
+import {Pages} from "./types";
+import {LETTERS, NUMBERS, SIGNS} from "./symbols/keys";
+import {getSettings, saveSettings} from "./settings/settings";
+
+interface SettingsSectionProps {
+  symbols: string[];
+  heading: string;
+}
 
 const checkError = (params: {
   correct: BRAILLE[][];
@@ -34,14 +42,19 @@ const checkError = (params: {
   return correctSymbol !== answer[wordIdx][letterIdx];
 };
 
+const wordList = new WordList();
+console.log(wordList.applySettings(getSettings()));
+
 export const App = () => {
   const inputRef = React.useRef<null | HTMLInputElement>(null);
-
+  const [page, setPage] = useState<Pages>(Pages.Game);
   const [answer, setAnswer] = useState<BRAILLE[][] | null>(null);
   const [currentExercise, setCurrentExercise] = useState<string[] | null>(null);
   const [currentLine, setCurrentLine] = useState<number | null>(null);
   const [maxLines, setMaxLines] = useState<number | null>(null);
+  const [settings, setSettings] = useState<string[]>(getSettings());
 
+  /*
   const reset = () => {
     setAnswer(null);
     if (inputRef.current) {
@@ -85,6 +98,66 @@ export const App = () => {
 
   const translated =
     currentLine === null || currentExercise === null ? null : translate(currentExercise[currentLine] as string);
+  */
+
+  if (page === Pages.Game) {
+    return (
+      <Layout setPage={setPage} page={page}>
+        <p>Game</p>
+      </Layout>
+    );
+  }
+
+  const SettingsSection = ({symbols, heading}: SettingsSectionProps ) => (
+    <>
+      <h2 className="m-4">{heading}</h2>
+      <ul className="flex flex-wrap">
+        {symbols.map(symbol => {
+          const brailleInput = decode(translate(symbol)[0][0]);
+          return (
+            <div
+              className="pr-8 pb-8 cursor-pointer"
+              onClick={() => {
+                if (settings.includes(symbol)) {
+                  // This is so dumb...
+                  setSettings(prevState => [
+                    ...prevState.filter(value => value !== symbol)
+                  ]);
+                }
+                else {
+                  setSettings(prevState => [
+                    ...prevState,
+                    symbol
+                  ]);
+                }
+              }}
+            >
+              <BrailleSymbol input={brailleInput} error={!(settings.includes(symbol))} text={symbol} />
+            </div>
+          );
+        })}
+      </ul>
+    </>
+  );
+
+  return (
+    <Layout setPage={setPage} page={page}>
+      <div className="flex justify-center flex-col w-1/3">
+        <h1>Toggle symbols</h1>
+        <SettingsSection symbols={LETTERS} heading="Letters" />
+        <SettingsSection symbols={NUMBERS} heading="Numbers" />
+        <SettingsSection symbols={SIGNS} heading="Signs" />
+        <button
+          className="btn"
+          onClick={() => saveSettings(settings)}
+          >
+          Save settings
+        </button>
+      </div>
+    </Layout>
+  );
+
+  /*
 
   return (
     <>
@@ -167,4 +240,5 @@ export const App = () => {
       )}
     </>
   );
+   */
 };

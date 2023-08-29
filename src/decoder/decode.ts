@@ -1,8 +1,9 @@
-export type DecodeResponseType = [boolean, boolean, boolean, boolean, boolean, boolean];
+import {DecodeResponseType} from "../types";
+import {BRAILLE} from "../symbols";
 
 const query = (number: number, index: number): boolean => (number & (1 << (index - 1))) > 0;
 
-export const decode = (number: number): DecodeResponseType => {
+export const decode = (number: BRAILLE): DecodeResponseType => {
   const decoded: DecodeResponseType = new Array(6) as DecodeResponseType;
 
   for (let i = 0; i < 6; i++) {
