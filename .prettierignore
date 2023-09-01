@@ -3,3 +3,5 @@
 build
 public
 package-lock.json
+*.json
+*.txt

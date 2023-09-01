@@ -28,8 +28,8 @@ const main = () => {
 
   const words = Array.from(map.keys());
 
-  fs.writeFileSync('./output/words.json', JSON.stringify({ words: words}));
+  fs.writeFileSync('./output/words.json', JSON.stringify({ words: words }));
   console.log(words.length);
-}
+};
 
 main();

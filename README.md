@@ -19,5 +19,5 @@ The word list is combined from the following sources:
 
 ### Filtering
 
-Words that contain invalid characters (characters that does not exist in Braille) are stripped out. Duplicates are 
+Words that contain invalid characters (characters that does not exist in Braille) are stripped out. Duplicates are
 removed. The total number of unique words included in the game is XX.

@@ -1,11 +1,5 @@
-import React from "react";
-import {Pages} from "../types";
-
-interface LayoutProps {
-  children: React.ReactNode;
-  page: Pages;
-  setPage: React.Dispatch<React.SetStateAction<Pages>>;
-}
+import React from 'react';
+import { Pages } from '../types';
 
 interface LayoutButtonProps {
   page: Pages;
@@ -17,36 +11,38 @@ const LayoutButton = ({ page, setPage }: LayoutButtonProps) => {
     case Pages.Game:
     default:
       return (
-        <a
-          className="btn"
-          onClick={() => setPage(Pages.Settings)}
-        >
+        <a className="link" onClick={() => setPage(Pages.Settings)}>
           Select symbols
         </a>
       );
     case Pages.Settings:
-    return (
-      <a
-        className="btn"
-        onClick={() => setPage(Pages.Game)}
-      >
-        Play game
-      </a>
-    );
+      return (
+        <a className="link" onClick={() => setPage(Pages.Game)}>
+          Return to the game
+        </a>
+      );
   }
+};
+
+interface LayoutProps {
+  children: React.ReactNode;
+  page: Pages;
+  setPage: React.Dispatch<React.SetStateAction<Pages>>;
 }
 
-export const Layout = ({children, page, setPage}: LayoutProps) => (
+export const Layout = ({ children, page, setPage }: LayoutProps) => (
   <>
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-200">
       <div className="navbar-start"></div>
       <div className="navbar-center hidden lg:flex">
+        <div className="prose">
+          <h2>Learn braille</h2>
+        </div>
+      </div>
+      <div className="navbar-end pr-8">
         <LayoutButton page={page} setPage={setPage} />
       </div>
-      <div className="navbar-end"></div>
     </div>
-    <div className="prose p-8 flex justify-center max-w-max text-center">
-      {children}
-    </div>
+    <div className="p-8 flex justify-center w-full text-center">{children}</div>
   </>
 );

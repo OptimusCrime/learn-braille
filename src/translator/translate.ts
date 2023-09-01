@@ -7,38 +7,37 @@ import {
   SYMBOLS_SIGNS,
   SYMBOLS_SPECIAL,
   SYMBOLS_SPECIAL_CAPITAL_LETTER,
-  SYMBOLS_SPECIAL_UNKNOWN
+  SYMBOLS_SPECIAL_SPACE,
+  SYMBOLS_SPECIAL_UNKNOWN,
 } from '../symbols';
 import { BrailleNotFoundException, UnexpectedCharacterException } from './errors';
 import { StringIterator } from './stringIterator';
 
-export const translate = (input: string, ignoreError?: boolean): BRAILLE[][] => {
+export const translate = (input: string, ignoreError?: boolean): BRAILLE[] => {
   const it = new StringIterator(input);
 
-  const output: BRAILLE[][] = [];
-  let temporary: BRAILLE[] = [];
+  const output: BRAILLE[] = [];
 
   while (it.hasNext()) {
     if (isSpace(it)) {
-      output.push(temporary);
-      temporary = [];
+      output.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_SPACE]);
       it.goForwards();
       continue;
     }
 
     if (isDoubleDash(it)) {
-      temporary.push(...SYMBOLS[SYMBOLS_SIGNS]['--']);
+      output.push(...SYMBOLS[SYMBOLS_SIGNS]['--']);
       it.goForwards(2);
       continue;
     }
 
     if (isUpperCase(it)) {
-      temporary.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_CAPITAL_LETTER]);
+      output.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_CAPITAL_LETTER]);
 
       const lowerCaseLetter = it.get().toLowerCase();
       if (!isLetterKey(lowerCaseLetter)) {
         if (ignoreError) {
-          temporary.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
+          output.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
           it.goForwards();
           continue;
         }
@@ -46,7 +45,7 @@ export const translate = (input: string, ignoreError?: boolean): BRAILLE[][] => 
         throw new BrailleNotFoundException(`Could not find braille symbol for: "${lowerCaseLetter}"`);
       }
 
-      temporary.push(...SYMBOLS[SYMBOLS_LETTERS][lowerCaseLetter]);
+      output.push(...SYMBOLS[SYMBOLS_LETTERS][lowerCaseLetter]);
 
       it.goForwards();
       continue;
@@ -56,7 +55,7 @@ export const translate = (input: string, ignoreError?: boolean): BRAILLE[][] => 
       const letter = it.get();
       if (!isLetterKey(letter)) {
         if (ignoreError) {
-          temporary.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
+          output.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
           it.goForwards();
           continue;
         }
@@ -64,14 +63,14 @@ export const translate = (input: string, ignoreError?: boolean): BRAILLE[][] => 
         throw new BrailleNotFoundException(`Could not find braille symbol for: "${letter}"`);
       }
 
-      temporary.push(...SYMBOLS[SYMBOLS_LETTERS][letter]);
+      output.push(...SYMBOLS[SYMBOLS_LETTERS][letter]);
 
       it.goForwards();
       continue;
     }
 
     if (isSign(it)) {
-      temporary.push(...SYMBOLS[SYMBOLS_SIGNS][it.get()]);
+      output.push(...SYMBOLS[SYMBOLS_SIGNS][it.get()]);
 
       it.goForwards();
       continue;
@@ -79,14 +78,14 @@ export const translate = (input: string, ignoreError?: boolean): BRAILLE[][] => 
 
     if (isNumber(it)) {
       if (ignoreError) {
-        temporary.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
+        output.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
         it.goForwards();
         continue;
       }
 
       // Bah, do this later
       // TODO
-      temporary.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
+      output.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
       it.goForwards();
       continue;
 
@@ -95,20 +94,16 @@ export const translate = (input: string, ignoreError?: boolean): BRAILLE[][] => 
 
     // If we got here, we found an unexpected character
     if (ignoreError) {
-      temporary.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
+      output.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
       it.goForwards();
       continue;
     }
 
     // TODO
-    temporary.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
+    output.push(...SYMBOLS[SYMBOLS_SPECIAL][SYMBOLS_SPECIAL_UNKNOWN]);
     it.goForwards();
 
     throw new UnexpectedCharacterException(`Encountered character we do not know how to handle: ${it.get()}`);
-  }
-
-  if (temporary.length > 0) {
-    output.push(temporary);
   }
 
   return output;

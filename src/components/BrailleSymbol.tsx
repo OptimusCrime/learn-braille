@@ -1,5 +1,6 @@
 import React from 'react';
-import {DecodeResponseType} from "../types";
+import { BRAILLE } from '../symbols';
+import { convertToDots } from '../utilities';
 
 const BrailleSymbolRow = ({ children, padding }: { children: React.ReactNode; padding?: boolean }) => (
   <div className={`${padding ? 'pb-1' : ''} flex items-center justify-between`}>{children}</div>
@@ -12,8 +13,8 @@ const BrailleDot = ({ enabled, padding }: { enabled: boolean; padding?: boolean 
 );
 
 interface BrailleSymbolProps {
-  input: DecodeResponseType;
-  error: boolean | null;
+  input: BRAILLE;
+  highlight?: 'success' | 'failure';
   text?: string;
 }
 
@@ -31,33 +32,34 @@ interface BrailleSymbolProps {
  * @param text
  * @constructor
  */
-export const BrailleSymbol = ({ input, error, text }: BrailleSymbolProps) => (
-  <div>
-    <div
-      className={`flex flex-col items-center justify-center mr-2 rounded ${
-        error === null ? '' : error ? 'bg-red-500' : 'bg-green-600'
-      }`}
-    >
-      <BrailleSymbolRow padding={true}>
-        <BrailleDot enabled={input[0]} />
-        <BrailleDot enabled={input[3]} padding={true} />
-      </BrailleSymbolRow>
-      <BrailleSymbolRow padding={true}>
-        <BrailleDot enabled={input[1]} />
-        <BrailleDot enabled={input[4]} padding={true} />
-      </BrailleSymbolRow>
-      <BrailleSymbolRow>
-        <BrailleDot enabled={input[2]} />
-        <BrailleDot enabled={input[5]} padding={true} />
-      </BrailleSymbolRow>
-    </div>
-    {text && (
-      <div className="text-center"
-      >
-        {text}
-      </div>
-    )}
-  </div>
-);
+export const BrailleSymbol = ({ input, highlight, text }: BrailleSymbolProps) => {
+  const [dot1, dot2, dot3, dot4, dot5, dot6] = convertToDots(input);
 
-export const BrailleSymbolSpace = () => <div className="flex w-6"></div>;
+  return (
+    <div>
+      <div
+        className={`flex flex-col items-center justify-center mr-2 mb-4 rounded ${
+          !highlight ? '' : highlight === 'failure' ? 'bg-red-500' : 'bg-green-600'
+        }`}
+      >
+        <BrailleSymbolRow padding={true}>
+          <BrailleDot enabled={dot1} />
+          <BrailleDot enabled={dot4} padding={true} />
+        </BrailleSymbolRow>
+        <BrailleSymbolRow padding={true}>
+          <BrailleDot enabled={dot2} />
+          <BrailleDot enabled={dot5} padding={true} />
+        </BrailleSymbolRow>
+        <BrailleSymbolRow>
+          <BrailleDot enabled={dot3} />
+          <BrailleDot enabled={dot6} padding={true} />
+        </BrailleSymbolRow>
+      </div>
+      {text && (
+        <div className="text-center prose">
+          <span>{text}</span>
+        </div>
+      )}
+    </div>
+  );
+};
