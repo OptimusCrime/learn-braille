@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+
 import { WordListContainer } from '../../wordListContainer';
-import { WordCurrent, StartGame, Stats, TextField, WordPrevious } from './components';
-import { GuessesStateProps, PreviousWordStateProps } from './stateProps';
-import { guessesInitialState } from './initialStates';
+import { StartGame, Stats, TextField, WordCurrent, WordPrevious } from './components';
 import { verifyCorrectSymbols } from './helpers';
+import { guessesInitialState } from './initialStates';
+import { GuessesStateProps, PreviousWordStateProps } from './stateProps';
 
 const wordListContainer = new WordListContainer();
 
@@ -49,7 +50,7 @@ export const Game = () => {
     }
 
     inputRef.current.focus();
-  }, [gameStarted]);
+  }, [gameStarted]); // eslint-disable-line
 
   if (!gameStarted) {
     return <StartGame loaded={ready} startGame={() => startGame(true)} />;

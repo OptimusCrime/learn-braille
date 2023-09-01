@@ -1,6 +1,6 @@
 // This will verify each letter guessed, because some letters and characters can correspond to multiple braille symbols
-import { translate } from '../../../translator';
 import { BRAILLE } from '../../../symbols';
+import { translate } from '../../../translator';
 
 interface VerifyCorrectSymbolsResponse {
   symbol: BRAILLE;

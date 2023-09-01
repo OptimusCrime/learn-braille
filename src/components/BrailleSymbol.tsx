@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { BRAILLE } from '../symbols';
 import { convertToDots } from '../utilities';
 

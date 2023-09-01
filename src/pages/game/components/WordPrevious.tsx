@@ -1,8 +1,9 @@
 import React from 'react';
-import { PreviousWordStateProps } from '../stateProps';
+
 import { BrailleSymbol } from '../../../components';
 import { SYMBOLS, SYMBOLS_LETTERS } from '../../../symbols';
 import { verifyCorrectAnswer, verifyCorrectSymbols } from '../helpers';
+import { PreviousWordStateProps } from '../stateProps';
 
 interface WordPreviousProps {
   previousWord: PreviousWordStateProps | null;

@@ -1,5 +1,6 @@
-import { formatClock } from '../helpers';
 import React from 'react';
+
+import { formatClock } from '../helpers';
 
 interface StatsProps {
   wordListSize: number;

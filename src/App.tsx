@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import { Layout } from './components';
-import { Pages } from './types';
 import { Game, Settings } from './pages';
+import { Pages } from './types';
 
 export const App = () => {
   const [page, setPage] = useState<Pages>(Pages.Game);
@@ -17,7 +17,7 @@ export const App = () => {
     case Pages.Settings:
       return (
         <AppWrapper>
-          <Settings />
+          <Settings goToGame={() => setPage(Pages.Game)} />
         </AppWrapper>
       );
     case Pages.Game:

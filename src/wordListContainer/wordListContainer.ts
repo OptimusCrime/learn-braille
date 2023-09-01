@@ -1,5 +1,5 @@
-import wordsPayload from './words.json';
 import { getSettingsFromLocalStorage } from '../utilities';
+import wordsPayload from './words.json';
 
 // TODO
 // const isLetter = (str: string): boolean => /[a-zæøåA-ZÆØÅ]/i.test(str);

@@ -1,6 +1,7 @@
 import React from 'react';
-import { translate } from '../../../translator';
+
 import { BrailleSymbol } from '../../../components';
+import { translate } from '../../../translator';
 
 interface CurrentWordProps {
   word: string | null;

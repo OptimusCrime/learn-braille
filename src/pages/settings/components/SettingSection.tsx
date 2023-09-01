@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { BrailleSymbol } from '../../../components';
 import { translate } from '../../../translator';
 

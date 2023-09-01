@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Pages } from '../types';
 
 interface LayoutButtonProps {
@@ -11,15 +12,15 @@ const LayoutButton = ({ page, setPage }: LayoutButtonProps) => {
     case Pages.Game:
     default:
       return (
-        <a className="link" onClick={() => setPage(Pages.Settings)}>
+        <button className="link" onClick={() => setPage(Pages.Settings)}>
           Select symbols
-        </a>
+        </button>
       );
     case Pages.Settings:
       return (
-        <a className="link" onClick={() => setPage(Pages.Game)}>
+        <button className="link" onClick={() => setPage(Pages.Game)}>
           Return to the game
-        </a>
+        </button>
       );
   }
 };

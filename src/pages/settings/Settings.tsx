@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
+
 import { LETTERS, NUMBERS, SIGNS } from '../../symbols/keys';
 import { getSettingsFromLocalStorage, saveSettingsInLocalStorage } from '../../utilities';
 import { SettingsSection } from './components';
+
+interface SettingsProps {
+  goToGame: () => void;
+}
+
+const numberOfSymbolsSelectedForSection = (symbols: string[], settings: string[]): string =>
+  `${symbols.filter((symbol) => settings.includes(symbol)).length} / ${symbols.length}`;
 
 const sections: { symbols: string[]; heading: string }[] = [
   {
@@ -18,10 +26,7 @@ const sections: { symbols: string[]; heading: string }[] = [
   },
 ];
 
-const numberOfSymbolsSelectedForSection = (symbols: string[], settings: string[]): string =>
-  `${symbols.filter((symbol) => settings.includes(symbol)).length} / ${symbols.length}`;
-
-export const Settings = () => {
+export const Settings = ({ goToGame }: SettingsProps) => {
   const [settings, setSettings] = useState<string[]>(getSettingsFromLocalStorage());
 
   return (
@@ -39,7 +44,13 @@ export const Settings = () => {
         />
       ))}
       <div className="flex justify-center">
-        <button className="btn" onClick={() => saveSettingsInLocalStorage(settings)}>
+        <button
+          className="btn"
+          onClick={() => {
+            saveSettingsInLocalStorage(settings);
+            goToGame();
+          }}
+        >
           Save settings
         </button>
       </div>
