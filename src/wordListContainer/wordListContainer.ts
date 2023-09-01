@@ -15,7 +15,7 @@ export class WordListContainer {
     this.lookup = wordsPayload.words;
   }
 
-  applySettings() {
+  async applySettings() {
     this.settings = getSettingsFromLocalStorage();
 
     // There has got to be a better way of doing this lmao
@@ -39,6 +39,7 @@ export class WordListContainer {
     }
 
     this.filteredLength = this.filtered.length;
+    return true;
   }
 
   getWordListSize(): number {

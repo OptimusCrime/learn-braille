@@ -36,11 +36,11 @@ export const Game = () => {
 
   useEffect(() => {
     if (!gameStarted) {
-      wordListContainer.applySettings();
-
-      // Make the game playable after the wordlist has been loaded with applied filters
-      setReady(true);
-      setCurrentWord(wordListContainer.getRandomWord());
+      wordListContainer.applySettings().then(() => {
+        // Make the game playable after the wordlist has been loaded with applied filters
+        setReady(true);
+        setCurrentWord(wordListContainer.getRandomWord());
+      });
     }
 
     startClock();
