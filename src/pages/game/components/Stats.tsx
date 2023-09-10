@@ -18,8 +18,14 @@ interface StatsProps {
 }
 
 // Avoiding 0 division here (if that is even possible?)
-const calculatePerMinute = (correct: number, clockDuration: number): string =>
-  Math.round(correct / (clockDuration === 0 ? 0.0001 : clockDuration / (1000 * 60))).toLocaleString();
+const calculatePerMinute = (correct: number, clockDuration: number): string => {
+  const value = Math.round(correct / (clockDuration === 0 ? 0.0001 : clockDuration / (1000 * 60)));
+  if (value <= 0) {
+    return '0';
+  }
+
+  return value.toLocaleString();
+};
 
 export const Stats = ({ wordListSize, clockDuration, guesses }: StatsProps) => (
   <div className="flex flex-col justify-center space-x-4">

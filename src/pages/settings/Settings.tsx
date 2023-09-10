@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { LETTERS, NUMBERS, SIGNS } from '../../symbols/keys';
-import { getSettingsFromLocalStorage, saveSettingsInLocalStorage } from '../../utilities';
+import { saveSettingsInLocalStorage } from '../../utilities';
 import { SettingsSection } from './components';
 
 interface SettingsProps {
   goToGame: () => void;
+  settings: string[];
+  setSettings: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const numberOfSymbolsSelectedForSection = (symbols: string[], settings: string[]): string =>
@@ -26,8 +28,8 @@ const sections: { symbols: string[]; heading: string }[] = [
   },
 ];
 
-export const Settings = ({ goToGame }: SettingsProps) => {
-  const [settings, setSettings] = useState<string[]>(getSettingsFromLocalStorage());
+export const Settings = (props: SettingsProps) => {
+  const { settings, setSettings, goToGame } = props;
 
   return (
     <div className="flex justify-center flex-col w-full max-w-xl">

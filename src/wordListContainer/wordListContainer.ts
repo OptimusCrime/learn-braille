@@ -1,4 +1,3 @@
-import { getSettingsFromLocalStorage } from '../utilities';
 import wordsPayload from './words.json';
 
 // TODO
@@ -15,8 +14,8 @@ export class WordListContainer {
     this.lookup = wordsPayload.words;
   }
 
-  async applySettings() {
-    this.settings = getSettingsFromLocalStorage();
+  async applySettings(settings: string[]) {
+    this.settings = settings;
 
     // There has got to be a better way of doing this lmao
     for (const word of this.lookup) {

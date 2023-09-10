@@ -8,7 +8,13 @@ import { GuessesStateProps, PreviousWordStateProps } from './stateProps';
 
 const wordListContainer = new WordListContainer();
 
-export const Game = () => {
+interface GameProps {
+  settings: string[];
+}
+
+export const Game = (props: GameProps) => {
+  const { settings } = props;
+
   const inputRef = React.useRef<null | HTMLInputElement>(null);
 
   // I don't really know if this works, but it is set after the wordlist has been filtered
@@ -36,7 +42,7 @@ export const Game = () => {
 
   useEffect(() => {
     if (!gameStarted) {
-      wordListContainer.applySettings().then(() => {
+      wordListContainer.applySettings(settings).then(() => {
         // Make the game playable after the wordlist has been loaded with applied filters
         setReady(true);
         setCurrentWord(wordListContainer.getRandomWord());
