@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { SettingData } from '../../utilities';
 import { WordListContainer } from '../../wordListContainer';
 import { StartGame, Stats, TextField, WordCurrent, WordPrevious } from './components';
 import { verifyCorrectSymbols } from './helpers';
@@ -9,7 +10,7 @@ import { GuessesStateProps, PreviousWordStateProps } from './stateProps';
 const wordListContainer = new WordListContainer();
 
 interface GameProps {
-  settings: string[];
+  settings: SettingData[];
 }
 
 export const Game = (props: GameProps) => {
@@ -41,9 +42,13 @@ export const Game = (props: GameProps) => {
   };
 
   useEffect(() => {
+    console.log('fired 1');
     if (!gameStarted) {
+      console.log('fired 2');
       wordListContainer.applySettings(settings).then(() => {
         // Make the game playable after the wordlist has been loaded with applied filters
+        console.log('fired 3');
+        console.log(wordListContainer.getWordListSize());
         setReady(true);
         setCurrentWord(wordListContainer.getRandomWord());
       });

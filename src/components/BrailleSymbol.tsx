@@ -15,7 +15,7 @@ const BrailleDot = ({ enabled, padding }: { enabled: boolean; padding?: boolean 
 
 interface BrailleSymbolProps {
   input: BRAILLE;
-  highlight?: 'success' | 'failure';
+  highlight?: 'success' | 'failure' | 'require';
   text?: string;
 }
 
@@ -40,7 +40,13 @@ export const BrailleSymbol = ({ input, highlight, text }: BrailleSymbolProps) =>
     <div>
       <div
         className={`flex flex-col items-center justify-center mr-2 mb-4 rounded ${
-          !highlight ? '' : highlight === 'failure' ? 'bg-red-500' : 'bg-green-600'
+          !highlight
+            ? ''
+            : highlight === 'failure'
+            ? 'bg-red-500'
+            : highlight === 'success'
+            ? 'bg-green-600'
+            : 'bg-green-900'
         }`}
       >
         <BrailleSymbolRow padding={true}>

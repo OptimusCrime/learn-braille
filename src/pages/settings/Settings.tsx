@@ -1,17 +1,17 @@
 import React from 'react';
 
 import { LETTERS, NUMBERS, SIGNS } from '../../symbols/keys';
-import { saveSettingsInLocalStorage } from '../../utilities';
+import { saveSettingsInLocalStorage, SettingData } from '../../utilities';
 import { SettingsSection } from './components';
 
 interface SettingsProps {
   goToGame: () => void;
-  settings: string[];
-  setSettings: React.Dispatch<React.SetStateAction<string[]>>;
+  settings: SettingData[];
+  setSettings: React.Dispatch<React.SetStateAction<SettingData[]>>;
 }
 
-const numberOfSymbolsSelectedForSection = (symbols: string[], settings: string[]): string =>
-  `${symbols.filter((symbol) => settings.includes(symbol)).length} / ${symbols.length}`;
+const numberOfSymbolsSelectedForSection = (symbols: string[], settings: SettingData[]): string =>
+  `${symbols.filter((symbol) => settings.find((item) => item.character === symbol)).length} / ${symbols.length}`;
 
 const sections: { symbols: string[]; heading: string }[] = [
   {

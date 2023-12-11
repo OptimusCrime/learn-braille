@@ -64,14 +64,31 @@ const WordPreviousText = (props: WordPreviousCommonProps) => {
     answer: answer,
   });
 
+  const allCorrect = verifiedAnswer.every((item) => item.correct);
+  if (allCorrect) {
+    return (
+      <div className="flex flex-col justify-center mb-8 opacity-60">
+        <span className="text-green-600">{answer}</span>
+      </div>
+    );
+  }
+
   return (
     <div className="flex justify-center mb-8 opacity-60">
-      {verifiedAnswer.map((item) => {
+      {verifiedAnswer.map((item, index) => {
         if (item.correct) {
-          return <span className="text-green-600">{item.character}</span>;
+          return (
+            <span className="text-green-600" key={index}>
+              {item.character}
+            </span>
+          );
         }
 
-        return <span className={`text-red-500 ${item.underline ? 'underline' : ''}`}>{item.character}</span>;
+        return (
+          <span className={`text-red-500 ${item.underline ? 'underline' : ''}`} key={index}>
+            {item.character}
+          </span>
+        );
       })}
     </div>
   );

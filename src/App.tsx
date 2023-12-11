@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { Layout } from './components';
 import { Game, Settings } from './pages';
 import { Pages } from './types';
-import { getSettingsFromLocalStorage } from './utilities';
+import { getSettingsFromLocalStorage, SettingData } from './utilities';
 
 export const App = () => {
   const [page, setPage] = useState<Pages>(Pages.Game);
-  const [settings, setSettings] = useState<string[]>(getSettingsFromLocalStorage());
+  const [settings, setSettings] = useState<SettingData[]>(getSettingsFromLocalStorage());
 
   const AppWrapper = ({ children }: { children: React.ReactNode }) => (
     <Layout setPage={setPage} page={page}>
